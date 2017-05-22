@@ -15,25 +15,22 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     width: '48px',
   },
+  active: {
+    opacity: '1.0',
+  },
   inactive: {
-    opacity: '20%',
+    opacity: '0.2',
   }
 });
 
-const store = {
-  selectors: {},
-  question: [],
-};
-
-function toggleSelector(number, value) {
-  store.selectors[number] = value !== undefined ? value : ! store.selectors[number];
-}
 
 class Selector extends Component {
-  render(props, state) {
+  render(props) {
+    let status = props.active ? styles.active : styles.inactive;
+
     return (
-      <div className={css(styles.selector)}>
-        <div className={css(styles.circle)} onClick={e => toggleSelector(props.number)}>
+      <div className={css(styles.selector, status)}>
+        <div className={css(styles.circle)} onClick={e => { props.toggleSelector(props.number); }}>
           {props.number}
         </div>
       </div>
@@ -41,11 +38,42 @@ class Selector extends Component {
   }
 }
 
-let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-numbers.forEach(x => toggleSelector(x, true));
+class SelectorBar extends Component {
+  constructor() {
+    super();
+
+    let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+    let selectors = {};
+
+    numbers.forEach(x => selectors[x] = true);
+
+    this.setState({
+      numbers,
+      selectors,
+    });
+  }
+  toggleSelector(number) {
+    let selectors = this.state.selectors;
+    selectors[number] = ! selectors[number];
+    this.setState({ selectors })
+  }
+  render() {
+    return (
+      <div>
+        { this.state.numbers.map(x =>
+            <Selector
+              number={x}
+              active={this.state.selectors[x]}
+              toggleSelector={this.toggleSelector.bind(this)}
+            />
+        ) }
+      </div>
+    );
+  }
+}
 
 render((
   <div id="app">
-    { numbers.map(x => <Selector number={x} />) }
+    <SelectorBar />
   </div>
 ), document.getElementById('app'));
