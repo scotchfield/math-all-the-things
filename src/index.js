@@ -73,13 +73,19 @@ class App extends Component {
     selectors[number] = ! selectors[number];
     this.setState({ selectors })
   }
+  generateQuestion() {
+    alert('ok');
+  }
   render() {
     return (
-      <SelectorBar
-        numbers={this.state.numbers}
-        selectors={this.state.selectors}
-        toggleSelector={this.toggleSelector.bind(this)}
-      />
+      <div>
+        <SelectorBar
+          numbers={this.state.numbers}
+          selectors={this.state.selectors}
+          toggleSelector={this.toggleSelector.bind(this)}
+        />
+        <button onClick={this.generateQuestion}>Question</button>
+      </div>
     );
   }
 }
