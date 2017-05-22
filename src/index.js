@@ -39,6 +39,22 @@ class Selector extends Component {
 }
 
 class SelectorBar extends Component {
+  render(props) {
+    return (
+      <div>
+        { props.numbers.map(x =>
+            <Selector
+              number={x}
+              active={props.selectors[x]}
+              toggleSelector={props.toggleSelector}
+            />
+        ) }
+      </div>
+    );
+  }
+}
+
+class App extends Component {
   constructor() {
     super();
 
@@ -59,22 +75,12 @@ class SelectorBar extends Component {
   }
   render() {
     return (
-      <div>
-        { this.state.numbers.map(x =>
-            <Selector
-              number={x}
-              active={this.state.selectors[x]}
-              toggleSelector={this.toggleSelector.bind(this)}
-            />
-        ) }
-      </div>
+      <SelectorBar
+        numbers={this.state.numbers}
+        selectors={this.state.selectors}
+        toggleSelector={this.toggleSelector.bind(this)}
+      />
     );
-  }
-}
-
-class App extends Component {
-  render() {
-    return <SelectorBar />;
   }
 }
 
