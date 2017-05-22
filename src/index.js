@@ -72,8 +72,14 @@ class SelectorBar extends Component {
   }
 }
 
+class App extends Component {
+  render() {
+    return <SelectorBar />;
+  }
+}
+
 render((
   <div id="app">
-    <SelectorBar />
+    <App />
   </div>
 ), document.getElementById('app'));
