@@ -24,6 +24,7 @@
     "webpack": "^2.5.1"
   },
   "dependencies": {
+    "aphrodite": "^1.2.1",
     "preact": "^8.1.0"
   }
 }
