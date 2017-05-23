@@ -21,8 +21,11 @@ const styles = StyleSheet.create({
   question: {
     fontSize: '48pt',
     fontWeight: 'bold',
-    marginTop: '32px',
   },
+  answer: {
+    fontSize: '64pt',
+    fontWeight: 'bold',
+  }
 });
 
 
@@ -39,7 +42,8 @@ class App extends Component {
     this.setState({
       numbers,
       selectors,
-      question: [],
+      question: '',
+      answer: '',
     });
   }
   toggleSelector(number) {
@@ -50,25 +54,25 @@ class App extends Component {
     this.setState({ selectors })
   }
   generateQuestion() {
-    let values = [];
+    let choices = [];
 
     this.state.numbers.forEach(x => {
       if (this.state.selectors[x]) {
-        values.push(x);
+        choices.push(x);
       }
     });
 
-    if (values.length > 0) {
-      this.setState({ question: [
-        values[Math.floor(Math.random() * values.length)],
-        values[Math.floor(Math.random() * values.length)]
-      ] });
+    if (choices.length > 0) {
+      let a = choices[Math.floor(Math.random() * choices.length)];
+      let b = choices[Math.floor(Math.random() * choices.length)];
+
+      this.setState({
+        question: `${a} × ${b}`,
+        answer: a * b,
+      })
     }
   }
   render() {
-    let question = this.state.question.length === 2 ?
-      `${this.state.question[0]} × ${this.state.question[1]}` : '';
-
     return (
       <div>
         <SelectorBar
@@ -83,7 +87,12 @@ class App extends Component {
         </div>
         <div className={css(styles.container)}>
           <span className={css(styles.question)}>
-            { question }
+            { this.state.question }
+          </span>
+        </div>
+        <div className={css(styles.container)}>
+          <span className={css(styles.answer)}>
+            { this.state.answer }
           </span>
         </div>
       </div>
