@@ -2,6 +2,7 @@ import { h, render, Component } from 'preact';
 import { StyleSheet, css } from 'aphrodite';
 
 import Answer from './Answer';
+import Question from './Question';
 import SelectorBar from './SelectorBar';
 
 
@@ -21,10 +22,6 @@ const styles = StyleSheet.create({
   container: {
     paddingBottom: '32px',
     textAlign: 'center',
-  },
-  question: {
-    fontSize: '48pt',
-    fontWeight: 'bold',
   },
 });
 
@@ -120,16 +117,10 @@ export default class App extends Component {
             </a>
           ) }
         </div>
-        <div className={css(styles.container)}>
-          <a className={css(styles.button)} onClick={this.generateQuestion}>
-            Question
-          </a>
-        </div>
-        <div className={css(styles.container)}>
-          <span className={css(styles.question)}>
-            { this.state.question }
-          </span>
-        </div>
+        <Question
+          question={this.state.question}
+          generate={this.generateQuestion}
+        />
         <Answer answer={ this.state.answer } />
       </div>
     );
