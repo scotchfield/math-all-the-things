@@ -33,19 +33,20 @@ class App extends Component {
 
     let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
     let selectors = {};
-    let question = [];
 
     numbers.forEach(x => selectors[x] = true);
 
     this.setState({
       numbers,
       selectors,
-      question,
+      question: [],
     });
   }
   toggleSelector(number) {
     let selectors = this.state.selectors;
+
     selectors[number] = ! selectors[number];
+
     this.setState({ selectors })
   }
   generateQuestion() {
