@@ -100,7 +100,7 @@ class App extends Component {
     let values = [];
 
     this.state.numbers.forEach(x => {
-      if (x) {
+      if (this.state.selectors[x]) {
         values.push(x);
       }
     });
