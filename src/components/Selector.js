@@ -5,7 +5,7 @@ import { StyleSheet, css } from 'aphrodite';
 const styles = StyleSheet.create({
   selector: {
     float: 'left',
-    width: '8.33%',
+    width: '7.69%',
   },
   circle: {
     backgroundColor: 'DeepSkyBlue',
