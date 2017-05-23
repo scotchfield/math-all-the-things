@@ -25,6 +25,9 @@ const styles = StyleSheet.create({
   answer: {
     fontSize: '64pt',
     fontWeight: 'bold',
+  },
+  hidden: {
+    display: 'none',
   }
 });
 
@@ -44,6 +47,7 @@ class App extends Component {
       selectors,
       question: '',
       answer: '',
+      showAnswer: false,
     });
   }
   toggleSelector(number) {
@@ -69,8 +73,12 @@ class App extends Component {
       this.setState({
         question: `${a} × ${b}`,
         answer: a * b,
+        showAnswer: false,
       })
     }
+  }
+  toggleAnswer() {
+    this.setState({ showAnswer: ! this.state.showAnswer });
   }
   render() {
     return (
@@ -91,6 +99,11 @@ class App extends Component {
           </span>
         </div>
         <div className={css(styles.container)}>
+          <a className={css(styles.button)} onClick={this.toggleAnswer.bind(this)}>
+            Toggle Answer
+          </a>
+        </div>
+        <div className={css(styles.container, this.state.showAnswer ? null : styles.hidden)}>
           <span className={css(styles.answer)}>
             { this.state.answer }
           </span>
