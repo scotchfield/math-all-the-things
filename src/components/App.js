@@ -1,6 +1,7 @@
 import { h, render, Component } from 'preact';
 import { StyleSheet, css } from 'aphrodite';
 
+import Answer from './Answer';
 import SelectorBar from './SelectorBar';
 
 
@@ -25,13 +26,6 @@ const styles = StyleSheet.create({
     fontSize: '48pt',
     fontWeight: 'bold',
   },
-  answer: {
-    fontSize: '64pt',
-    fontWeight: 'bold',
-  },
-  hidden: {
-    display: 'none',
-  }
 });
 
 export default class App extends Component {
@@ -136,16 +130,7 @@ export default class App extends Component {
             { this.state.question }
           </span>
         </div>
-        <div className={css(styles.container)}>
-          <a className={css(styles.button)} onClick={this.toggleAnswer}>
-            Toggle Answer
-          </a>
-        </div>
-        <div className={css(styles.container, this.state.showAnswer ? null : styles.hidden)}>
-          <span className={css(styles.answer)}>
-            { this.state.answer }
-          </span>
-        </div>
+        <Answer answer={ this.state.answer } />
       </div>
     );
   }
