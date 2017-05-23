@@ -42,9 +42,26 @@ class App extends Component {
 
     numbers.forEach(x => selectors[x] = true);
 
+    let operations = {
+      add: {
+        symbol: '+',
+        f: (a, b) => a + b,
+      },
+      subtract: {
+        symbol: '-',
+        f: (a, b) => a - b,
+      },
+      multiply: {
+        symbol: '\u{00D7}',
+        f: (a, b) => a * b,
+      }
+    };
+
     this.setState({
       numbers,
       selectors,
+      operations,
+      activeOperation: 'multiply',
       question: '',
       answer: '',
       showAnswer: false,
@@ -69,10 +86,11 @@ class App extends Component {
     if (choices.length > 0) {
       let a = choices[Math.floor(Math.random() * choices.length)];
       let b = choices[Math.floor(Math.random() * choices.length)];
+      let op = this.state.operations[this.state.activeOperation];
 
       this.setState({
-        question: `${a} × ${b}`,
-        answer: a * b,
+        question: `${a} ${op.symbol} ${b}`,
+        answer: op.f(a, b),
         showAnswer: false,
       })
     }
