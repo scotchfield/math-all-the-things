@@ -1,7 +1,7 @@
 {
-  "name": "multiply",
+  "name": "math-all-the-things",
   "version": "1.0.0",
-  "description": "Multiplication testing SPA",
+  "description": "Math study helper with Preact and Aphrodite",
   "main": "src/index.js",
   "scripts": {
     "build": "webpack",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/scotchfield/multiply.git"
+    "url": "git+https://github.com/scotchfield/math-all-the-things.git"
   },
   "author": "scotchfield",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/scotchfield/multiply/issues"
+    "url": "https://github.com/scotchfield/math-all-the-things/issues"
   },
-  "homepage": "https://github.com/scotchfield/multiply#readme",
+  "homepage": "https://github.com/scotchfield/math-all-the-things#readme",
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-plugin-transform-react-jsx": "^6.24.1",
