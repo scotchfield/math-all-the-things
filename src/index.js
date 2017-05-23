@@ -10,12 +10,15 @@ const styles = StyleSheet.create({
     borderRadius: '28px',
     color: '#ffffff',
     cursor: 'pointer',
-    marginTop: '16px',
+    margin: '8px',
     padding: '10px 20px 10px 20px',
     textDecoration: 'none',
   },
+  inactive: {
+    opacity: '0.2',
+  },
   container: {
-    paddingBottom: '16px',
+    paddingBottom: '32px',
     textAlign: 'center',
   },
   question: {
@@ -66,6 +69,11 @@ class App extends Component {
       answer: '',
       showAnswer: false,
     });
+
+    this.toggleAnswer = this.toggleAnswer.bind(this);
+    this.toggleSelector = this.toggleSelector.bind(this);
+    this.generateQuestion = this.generateQuestion.bind(this);
+    this.setOperation = this.setOperation.bind(this);
   }
   toggleSelector(number) {
     let selectors = this.state.selectors;
@@ -98,16 +106,26 @@ class App extends Component {
   toggleAnswer() {
     this.setState({ showAnswer: ! this.state.showAnswer });
   }
+  setOperation(operation) {
+    this.setState({ activeOperation: operation });
+  }
   render() {
     return (
       <div>
         <SelectorBar
           numbers={this.state.numbers}
           selectors={this.state.selectors}
-          toggleSelector={this.toggleSelector.bind(this)}
+          toggleSelector={this.toggleSelector}
         />
         <div className={css(styles.container)}>
-          <a className={css(styles.button)} onClick={this.generateQuestion.bind(this)}>
+          { Object.keys(this.state.operations).map(key =>
+            <a className={css(styles.button, this.state.activeOperation !== key ? styles.inactive : null)} onClick={() => this.setOperation(key)}>
+              { this.state.operations[key].symbol }
+            </a>
+          ) }
+        </div>
+        <div className={css(styles.container)}>
+          <a className={css(styles.button)} onClick={this.generateQuestion}>
             Question
           </a>
         </div>
@@ -117,7 +135,7 @@ class App extends Component {
           </span>
         </div>
         <div className={css(styles.container)}>
-          <a className={css(styles.button)} onClick={this.toggleAnswer.bind(this)}>
+          <a className={css(styles.button)} onClick={this.toggleAnswer}>
             Toggle Answer
           </a>
         </div>
