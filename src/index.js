@@ -8,18 +8,33 @@ const styles = StyleSheet.create({
   },
   circle: {
     backgroundColor: 'DeepSkyBlue',
-    borderRadius: '50%',
+    borderRadius: '16px',
     height: '48px',
     lineHeight: '48px',
     margin: 'auto',
     textAlign: 'center',
-    width: '48px',
+    width: '75%',
   },
   active: {
     opacity: '1.0',
   },
   inactive: {
     opacity: '0.2',
+  },
+  selectorBar: {
+    height: '72px',
+  },
+  button: {
+    background: '#3498db',
+    borderRadius: '28px',
+    color: '#ffffff',
+    cursor: 'pointer',
+    marginTop: '16px',
+    padding: '10px 20px 10px 20px',
+    textDecoration: 'none',
+  },
+  buttonContainer: {
+    textAlign: 'center',
   }
 });
 
@@ -41,7 +56,7 @@ class Selector extends Component {
 class SelectorBar extends Component {
   render(props) {
     return (
-      <div>
+      <div className={css(styles.selectorBar)}>
         { props.numbers.map(x =>
             <Selector
               number={x}
@@ -84,7 +99,11 @@ class App extends Component {
           selectors={this.state.selectors}
           toggleSelector={this.toggleSelector.bind(this)}
         />
-        <button onClick={this.generateQuestion}>Question</button>
+        <div className={css(styles.buttonContainer)}>
+          <a className={css(styles.button)} onClick={this.generateQuestion}>
+            Question
+          </a>
+        </div>
       </div>
     );
   }
