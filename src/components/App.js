@@ -1,6 +1,8 @@
 import { h, render, Component } from 'preact';
 import { StyleSheet, css } from 'aphrodite';
 
+import operations from '../operations';
+
 import Answer from './Answer';
 import Button from './Button';
 import OperatorBar from './OperatorBar';
@@ -29,29 +31,9 @@ export default class App extends Component {
 
     numbers.forEach(x => selectors[x] = true);
 
-    let operations = {
-      add: {
-        symbol: '+',
-        f: (a, b) => a + b,
-      },
-      subtract: {
-        symbol: '-',
-        f: (a, b) => a - b,
-      },
-      multiply: {
-        symbol: '\u{00D7}',
-        f: (a, b) => a * b,
-      },
-      divide: {
-        symbol: '\u{00F7}',
-        f: (a, b) => b === 0 ? 'undefined' : a / b,
-      }
-    };
-
     this.setState({
       numbers,
       selectors,
-      operations,
       activeOperation: 'multiply',
       question: '',
       answer: '',
@@ -82,7 +64,7 @@ export default class App extends Component {
     if (choices.length > 0) {
       let a = choices[Math.floor(Math.random() * choices.length)];
       let b = choices[Math.floor(Math.random() * choices.length)];
-      let op = this.state.operations[this.state.activeOperation];
+      let op = operations[this.state.activeOperation];
 
       this.setState({
         question: `${a} ${op.symbol} ${b}`,
@@ -107,7 +89,7 @@ export default class App extends Component {
         />
 
         <OperatorBar
-          operations={this.state.operations}
+          operations={operations}
           activeOperation={this.state.activeOperation}
           setOperation={this.setOperation}
         />
