@@ -3,6 +3,7 @@ import { StyleSheet, css } from 'aphrodite';
 
 import Answer from './Answer';
 import Button from './Button';
+import OperatorBar from './OperatorBar';
 import Question from './Question';
 import SelectorBar from './SelectorBar';
 
@@ -99,20 +100,19 @@ export default class App extends Component {
           selectors={this.state.selectors}
           toggleSelector={this.toggleSelector}
         />
-        <div className={css(styles.container)}>
-          { Object.keys(this.state.operations).map(key =>
-            <Button
-              click={() => this.setOperation(key)}
-              content={this.state.operations[key].symbol}
-              inactive={this.state.activeOperation !== key}
-            />
-          ) }
-        </div>
+
+        <OperatorBar
+          operations={this.state.operations}
+          activeOperation={this.state.activeOperation}
+          setOperation={this.setOperation}
+        />
+
         <Question
           question={this.state.question}
           generate={this.generateQuestion}
         />
-        <Answer answer={ this.state.answer } />
+
+        <Answer answer={this.state.answer} />
       </div>
     );
   }
