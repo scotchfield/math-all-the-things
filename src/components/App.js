@@ -2,23 +2,12 @@ import { h, render, Component } from 'preact';
 import { StyleSheet, css } from 'aphrodite';
 
 import Answer from './Answer';
+import Button from './Button';
 import Question from './Question';
 import SelectorBar from './SelectorBar';
 
 
 const styles = StyleSheet.create({
-  button: {
-    background: '#3498db',
-    borderRadius: '28px',
-    color: '#ffffff',
-    cursor: 'pointer',
-    margin: '8px',
-    padding: '10px 20px 10px 20px',
-    textDecoration: 'none',
-  },
-  inactive: {
-    opacity: '0.2',
-  },
   container: {
     paddingBottom: '32px',
     textAlign: 'center',
@@ -112,9 +101,11 @@ export default class App extends Component {
         />
         <div className={css(styles.container)}>
           { Object.keys(this.state.operations).map(key =>
-            <a className={css(styles.button, this.state.activeOperation !== key ? styles.inactive : null)} onClick={() => this.setOperation(key)}>
-              { this.state.operations[key].symbol }
-            </a>
+            <Button
+              click={() => this.setOperation(key)}
+              content={this.state.operations[key].symbol}
+              inactive={this.state.activeOperation !== key}
+            />
           ) }
         </div>
         <Question

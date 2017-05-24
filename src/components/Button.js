@@ -12,12 +12,15 @@ const styles = StyleSheet.create({
     padding: '10px 20px 10px 20px',
     textDecoration: 'none',
   },
+  inactive: {
+    opacity: '0.2',
+  },
 });
 
 export default class Button extends Component {
   render(props) {
     return (
-      <a className={css(styles.button)} onClick={props.click}>
+      <a className={css(styles.button, props.inactive ? styles.inactive : null)} onClick={props.click}>
         {props.content}
       </a>
     );
