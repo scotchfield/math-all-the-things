@@ -6,7 +6,8 @@ import Selector from './Selector';
 
 const styles = StyleSheet.create({
   selectorBar: {
-    height: '72px',
+    marginBottom: '24px',
+    textAlign: 'center',
   },
 });
 

@@ -4,8 +4,13 @@ import { StyleSheet, css } from 'aphrodite';
 
 const styles = StyleSheet.create({
   selector: {
-    float: 'left',
-    width: '7.69%',
+    display: 'inline-block',
+    margin: '8px 0.5%',
+    width: '13%',
+    '@media only screen and (min-width: 800px)': {
+      margin: '0 0.5%',
+      width: '6.5%',
+    }
   },
   circle: {
     backgroundColor: 'DeepSkyBlue',

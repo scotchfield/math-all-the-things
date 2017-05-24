@@ -9,6 +9,11 @@ import SelectorBar from './SelectorBar';
 
 
 const styles = StyleSheet.create({
+  app: {
+    '@media (max-width: 800px)': {
+      fontSize: '150%',
+    },
+  },
   container: {
     paddingBottom: '32px',
     textAlign: 'center',
@@ -94,7 +99,7 @@ export default class App extends Component {
   }
   render() {
     return (
-      <div>
+      <div className={css(styles.app)}>
         <SelectorBar
           numbers={this.state.numbers}
           selectors={this.state.selectors}
